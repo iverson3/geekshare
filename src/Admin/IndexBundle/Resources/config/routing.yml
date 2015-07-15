@@ -1,0 +1,10 @@
+# 告诉系统使用annotation注释的方式进行路由配置
+admin_index:
+    resource: "@AdminIndexBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+# admin_index_homepage:
+#     pattern:  /admin
+#     defaults: { _controller: AdminIndexBundle:Index:index }

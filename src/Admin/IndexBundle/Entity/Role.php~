@@ -1,0 +1,35 @@
+<?php  
+
+namespace Admin\IndexBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="role")
+ */
+class Role
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    protected $remark;
+
+    /**
+     * @ORM\Column(type="string", length=1024)
+     */
+    protected $rolefield;
+  
+}

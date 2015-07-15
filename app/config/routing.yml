@@ -1,0 +1,11 @@
+admin_index:
+    resource: "@AdminIndexBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_user:
+    resource: "@HomeUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+home_index:
+    resource: "@HomeIndexBundle/Resources/config/routing.yml"
+    prefix:   /

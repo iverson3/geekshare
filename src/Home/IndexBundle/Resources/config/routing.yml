@@ -1,0 +1,33 @@
+home_index_index:
+    pattern:  /
+    defaults: { _controller: HomeIndexBundle:Index:index }
+
+home_index_share:
+    pattern:  /share
+    defaults: { _controller: HomeIndexBundle:Index:share }
+
+home_index_doshare:
+    pattern:  /doshare
+    defaults: { _controller: HomeIndexBundle:Index:doshare }
+
+home_index_sharedetail:
+    pattern:  /share/{shareid}
+    defaults: { _controller: HomeIndexBundle:Index:sharedetail }
+    requirements:
+        shareid: \d+   
+
+home_index_geekinfo:
+    pattern:  /geek/{userid}
+    defaults: { _controller: HomeIndexBundle:Index:geekinfo }
+    requirements:
+        userid: \d+  
+
+home_index_geeklist:
+    pattern:  /geeks
+    defaults: { _controller: HomeIndexBundle:Index:geeklist }
+
+home_index_index_:
+    pattern:  /{lang}/{page}
+    defaults: { _controller: HomeIndexBundle:Index:sharelist, page: 1 }
+    requirements:
+        page: \d+   

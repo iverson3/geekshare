@@ -1,0 +1,7 @@
+parameters:
+#    admin_index.example.class: Admin\IndexBundle\Example
+
+services:
+#    admin_index.example:
+#        class: %admin_index.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

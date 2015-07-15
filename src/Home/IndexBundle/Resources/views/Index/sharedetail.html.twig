@@ -1,0 +1,19 @@
+{{ share.id }}        <br>
+
+{% if share.username == '' %}
+	<span>匿名网友</span>
+{% else %}
+	{% if share.isopen == 1 %}
+		<a href="{{ path('home_index_geekinfo', {'userid': share.id}) }}" style="color:black;">{{ share.username }}</a>
+	{% else %}
+		<span>{{ share.username }}</span>
+	{% endif %}
+{% endif %}
+<br>
+
+{{ share[0].url }}    <br>
+{{ share[0].title }}  <br>
+{{ share[0].reason }} <br>
+{{ share[0].labels }} <br>
+{{ share[0].hit }} <br>
+{{ share[0].sharetime|date('d/m/Y H:i') }} <br>

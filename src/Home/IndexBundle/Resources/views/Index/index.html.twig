@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>极客分享</title>
+    <!-- Bootstrap -->
+    {% stylesheets '@HomeIndexBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    
+    <script>
+    window.onresize = function() {
+        var titleBar = document.getElementById("page-title-bar");
+        var mainBox = document.getElementById("mainBox");
+        //titleWidth = document.body.clientWidth * 0.6;
+        //titleBar.style.width = mainBox.style.width + "px";          
+    }
+    </script>
+    <script type="text/javascript" src="{{ asset('bundles/homeindex/js/jquery-1.11.3.js') }}"/></script>
+    {% javascripts '@HomeIndexBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="output fluid zh cn reader-day-mode reader-font2" data-js-module="recommendation" data-locale="zh-CN">
+    <div class="navbar navbar-jianshu shrink">
+        <div class="dropdown">
+            <a class="dropdown-toggle logo" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0)">简</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><a href="/"><i class="fa fa-home"></i> 首页</a></li>
+                <li><a href="/collections"><i class="fa fa-th"></i> 专题</a></li>
+                <li><a href="/user_invitations"><i class="fa fa-money"></i> 发钱啦</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="navbar-user">
+        <a class="login" data-signup-link="true" data-toggle="modal" href="#">
+            <i class="fa fa-user"></i> 加入我们</a>
+        <a class="login" data-signin-link="true" data-toggle="modal" href="#">
+            <i class="fa fa-pencil"></i> 建议</a>
+        <a class="daytime set-view-mode pull-right" href="javascript:void(0)"><i class="fa fa-moon-o"></i></a>
+    </div>
+    <div class="navbar navbar-jianshu expanded">
+        <div class="dropdown">
+            <a class="active logo" role="button" data-original-title="个人主页" data-container="div.expanded" href="/">
+                <b>极</b><i class="fa fa-home"></i><span class="title">首页</span>
+            </a>
+            <a data-toggle="tooltip" data-placement="right" data-original-title="专题" data-container="div.expanded" href="＃">
+                <i class="fa fa-th"></i><span class="title">专题</span>
+            </a>
+            <a data-toggle="tooltip" data-placement="right" data-original-title="下载手机应用" data-container="body" href="＃">
+                <i class="fa fa-mobile"></i><span class="title">下载手机应用</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <a href="#view-mode-modal" data-toggle="modal"><i class="fa fa-font"></i><span class="title">显示模式</span></a>
+            <a class="signin" data-signin-link="true" data-toggle="modal" data-placement="right" data-original-title="登录" data-container="div.expanded" href="＃">
+                <i class="fa fa-sign-in"></i><span class="title">登录</span>
+            </a>
+        </div>
+    </div>
+    <!-- 登陆部分，暂时先注释 -->
+    <div tabindex="-1" aria-hidden="true" id="login-modal" class="modal hide fade login-modal" data-js-module="login-modal">
+        <div class="modal-header">
+            <h4 class="title">
+                <span>
+                <a class="active" id="signin-link" href="javascript:void(null);">登录</a>
+                <b>·</b>
+                <a id="signup-link" href="javascript:void(null);">注册</a>
+                </span>
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <div class="modal-body large-login">
+            <div class="sign-up">
+                <form id="sign_up" class="form-horizontal" action="/users.json" accept-charset="UTF-8" data-remote="true" method="post">
+                    <input name="utf8" type="hidden" value="✓">
+                    <p id="signup_errors" class="signin_error hide"></p>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="fa fa-envelope-o"></i></span>
+                        <input type="text" name="email" id="sign_up_email" value="" class="span2" placeholder="你的邮件地址">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="fa fa-user"></i></span>
+                        <input type="text" name="nickname" id="nickname" value="" class="span2" placeholder="选一个昵称">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="fa fa-unlock-alt"></i></span>
+                        <input type="password" name="password" id="sign_up_password" class="span2" placeholder="输入密码">
+                    </div>
+                    <div class="input-prepend captcha">
+                        <div class="captcha_fields">
+                        </div>
+                    </div>
+                    <button name="button" type="submit" class="ladda-button submit-button" data-color="green" data-disable-with="<span class='ladda-label'>loading</span>"><span class="ladda-label">注册</span></button>
+                </form>
+            </div>
+            <div class="sign-in">
+                <form id="sign_in" class="form-horizontal" action="/sessions.json" accept-charset="UTF-8" data-remote="true" method="post">
+                    <input name="utf8" type="hidden" value="✓">
+                    <p id="signin_errors" class="signin_error hide"></p>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="fa fa-envelope-o"></i></span>
+                        <input type="text" name="email" id="sign_in_email" value="" class="span2" placeholder="邮箱">
+                    </div>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="fa fa-unlock-alt"></i></span>
+                        <input type="password" name="password" id="sign_in_password" class="span2" placeholder="密码">
+                    </div>
+                    <div class="input-prepend captcha">
+                        <div class="captcha_fields">
+                        </div>
+                    </div>
+                    <button class="ladda-button submit-button" data-color="blue">
+                        <span class="ladda-label">登 录</span>
+                    </button>
+                    <div class="control-group text-left">
+                        <div class="icheckbox_minimal checked" style="position: relative;">
+                            <input type="checkbox" name="remember_me" id="remember_me" value="true" checked="checked" style="position: absolute; opacity: 0;">
+                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                        </div> 记住我
+                        <a href="/users/password/new">忘记密码</a>
+                    </div>
+                </form>
+            </div>
+            <div class="login-sns">
+                <p>您还可以通过以下方式直接登录</p>
+                <ul class="login-sns">
+                    <li class="weibo">
+                        <a href="/users/auth/weibo"><i class="fa fa-weibo"></i></a>
+                    </li>
+                    <li class="qq">
+                        <a href="/users/auth/qq_connect"><i class="fa fa-qq"></i></a>
+                    </li>
+                    <li class="douban">
+                        <a href="/users/auth/douban"><i class="fa fa-douban"></i></a>
+                    </li>
+                    <li class="google">
+                        <a href="/users/auth/google_oauth2"><i class="fa fa-google-plus"></i></a>
+                    </li>
+                    <li class="wechat">
+                        <a href="/users/auth/wechat"><i class="fa fa-wechat"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 用户主界面显示部分 -->
+    <div class="row-fluid">
+        <div class="recommended">
+            <!-- 左侧菜单栏和图片部分，占比25% -->
+            <div class="span3 left-aside">
+                <div class="navbar navbar-jianshu expanded">
+                    <div class="dropdown">
+                        <a class="active logo" role="button" data-original-title="个人主页" data-container="div.expanded" href="/">
+                            <b>Gs</b>
+                            <i class="fa fa-home"></i>
+                            <span class="title">首页</span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="right" data-original-title="专题" data-container="div.expanded" href="#">
+                            <i class="fa fa-th"></i>
+                            <span class="title">专题</span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="right" data-original-title="下载手机应用" data-container="body" href="#">
+                            <i class="fa fa-mobile"></i>
+                            <span class="title">下载手机应用</span>
+                        </a>
+                    </div>
+                    <div class="nav-user">
+                        <a href="#view-mode-modal" data-toggle="modal"><i class="fa fa-font"></i><span class="title">显示模式</span></a>
+                        <a class="signin" data-signin-link="true" data-toggle="modal" data-placement="right" data-original-title="登录" data-container="div.expanded" href="#">
+                            <i class="fa fa-sign-in"></i><span class="title">登录</span>
+                        </a>
+                    </div>
+                </div>
+                <div style="background-image: url({{ asset('bundles/homeindex/images/pHb6zxgXGuU5oKacirYs.jpg') }});" class="cover-img"></div>
+                <div class="bottom-block">
+                    <h1>极客分享</h1>
+                    <h3>分享知识，沟通想法</h3>
+                    <p>一个基于IT技术分享的社区</p>
+                    <a class="btn btn-large btn-success" href="/writer#/">即刻分享</a>
+                </div>
+                <div class="img-info">
+                    <i class="fa fa-info"></i>
+                    <div class="info">
+                        Photo by <a target="_blank" href="https://s3.amazonaws.com/">s3.amazonaws</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 右侧的内容区域，占比75% -->
+            <div id="mainBox" class="span7 offset3">
+                <!-- 主标题栏 -->
+                <div id="page-title-bar" class="page-title">
+                    <ul class="recommened-nav navigation clearfix" data-container="#list-container" data-loader=".loader-tiny" data-user-slug="">
+                        <!-- 未登录状态 -->
+                        <!-- Active: recommended notes list -->
+                        <li class="active">
+                            <a data-pjax="true" href="/recommendations/notes">极客分享</a>
+                        </li>
+                        <li class="">
+                            <a data-pjax="true" href="/trending/now">原创分享</a>
+                        </li>
+                        <img class="hide loader-tiny" src="{{ asset('bundles/homeindex/images/tiny.gif') }}" alt="Tiny">
+                        <li class="search">
+                            <form class="search-form" action="/search" accept-charset="UTF-8" method="get">
+                                <input name="utf8" type="hidden" value="✓">
+                                <input type="text" name="q" id="q" placeholder="发现更多" class="input-medium search-query">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 分享列表容器，模板中直接循环输出数据库取出的内容 -->
+                <div id="list-container">
+                    <ul class="unstyled clearfix sort-nav" id="collection-categories-nav" data-js-module="collection-category" data-fetch-url="/recommendations/notes">
+                        {% for lang in langs %}
+                            {# 判断id是否是偶数 #}
+                            {% if lang.code == nowlang %}
+                                <li class="active">
+                                    <a class="category" href="{{ path('home_index_index_', {'lang': lang.code}) }}">{{ lang.name }}</a>
+                                </li>
+                            {% else %}
+                                <li class="">
+                                    <a class="category" href="{{ path('home_index_index_', {'lang': lang.code}) }}">{{ lang.name }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <!-- 正在加载样式，class设为hide则为隐藏 -->
+                        <li>
+                            <img class="loader-tiny" src="{{ asset('bundles/homeindex/images/tiny.gif') }}" alt="Tiny">
+                        </li>
+                    </ul>
+                    <ul class="article-list thumbnails">
+                        {% for share in sharelist %}
+                        <li class="have-img">
+                            <div>
+                                <p class="list-top">
+                                    {% if share.username == '' %}
+                                        <a class="author-name blue-link" target="_blank" href="javascript:;">匿名网友</a>
+                                    {% else %}
+                                        {% if share.isopen == 1 %}
+                                            <a class="author-name blue-link" target="_blank" href="{{ path('home_index_geekinfo', {'userid': share.id}) }}">{{ share.username }}</a>
+                                        {% else %}
+                                            <a class="author-name blue-link" target="_blank" href="javascript:;">{{ share.username }}</a>
+                                        {% endif %}
+                                    {% endif %}
+                                    <em>·</em>
+                                    <span class="time">{{ share[0].sharetime|date('Y-m-d H:i:s')|created_ago }}</span>
+                                </p>
+                                <h4 class="title"><a target="_blank" href="./shareContent.html">{{ share[0].title }}</a></h4>
+                                <div class="list-footer">
+                                    <a target="_blank" href="/p/321049a848b8">
+                                      {{ share[0].labels }}
+                                    </a>
+                                    <a target="_blank" href="/p/321049a848b8">
+                                      · 阅读 {{ share[0].hit }}
+                                    </a>
+                                    <a target="_blank" href="/p/321049a848b8#comments">
+                                       · 评论 4
+                                    </a>
+                                    <span> · 赞 3</span>
+                                    <span> · 时间 {{ share[0].sharetime|date('Y/m/d H:i') }}</span>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <!-- <div class="load-more">
+                        <button class="ladda-button " data-style="slide-left" data-type="script" data-remote="" data-size="medium" data-url="/recommendations/notes?max_id=1435994105" data-color="maleskine" data-method="get">
+                            <span class="ladda-label">点击查看更多</span>
+                            <span class="ladda-spinner"></span></button>
+                    </div> -->
+                    <!-- 分页按钮 -->
+                    <div class="pagination" style="padding-left: 36px;">
+                        <ul>
+                            <li class="next">
+                                <span style=" padding-left: 50px;">总页数: {{ count }}</span>
+                            </li>
+                            {% if (nowpage - 1) == 0 %}
+                            {% else %}
+                            <li class="next">
+                                <a rel="next" data-remote="true" href="{{ path('home_index_index_', {'lang': nowlang, 'page': nowpage - 1}) }}">上一页</a>
+                            </li>
+                            {% endif %}
+                            {% if nowpage == count %}
+                            {% else %}
+                            <li class="next">
+                                <a rel="next" data-remote="true" href="{{ path('home_index_index_', {'lang': nowlang, 'page': nowpage + 1}) }}">下一页</a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                <form action="" method="get" onsubmit="jumpsubmit(); return false;">
+                                    <input type="hidden" id="nowlang" value="{{ nowlang }}">
+                                    <input type="text" style="width: 40px; margin-top: 10px;" id="page" value="{{ nowpage }}">
+                                    <input type="submit" class="btn btn-default" value="跳转">
+                                </form>
+                            </li>
+                        </ul>
+                    </div>                    
+                    
+                    <script type="text/javascript">
+                        var count = {{ count }};
+                        // 拦截提交事件
+                        function jumpsubmit(){
+                            var nowlang = document.getElementById('nowlang').value;
+                            var page    = document.getElementById('page').value;
+                            if ((page > count) || (page < 1) || (isNaN(page))) {
+                                alert("输入有误哦");
+                                return false;
+                            }
+                            var url = "{{ path('home_index_index_', {'lang': nowlang, 'page': nowpage}) }}";
+                            var arr = url.split("/");
+                            if (arr.length === 2) {
+                                url = url + "/" + page;
+                            } else {
+                                url = "/" + arr[1] + "/" + page;
+                            }
+                            window.location.href = url;
+                            return false;
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 网站底部信息区域 -->
+    <footer>
+        <div class="footer-l">
+            <p>
+                <a href="#" target="_blank">关于极客分享</a> |
+                <a target="_blank" href="#">联系我们</a> |
+                <a href="#" target="_blank">作者成书计划</a> |
+                <a href="#" target="_blank">帮助中心</a> |
+                <a href="#" target="_blank">极客周边</a> |
+                <a href="#">合作伙伴</a> |
+                <a href="#">专题</a> |
+                <a href="#">文章</a>
+            </p>
+            <p>©2015-2018 <a href="/" target="_blank">极客分享</a> / 鄂ICP备xxxxxxxx号-x</p>
+        </div>
+        <div class="footer-r pull-right">
+            <div class="app-download-btn">
+            </div>
+            <div>
+                关注我们:
+                <a href="http://weibo.com/#" target="_blank">
+                    <i class="fa fa-weibo"></i>
+                </a>
+                <a class="weixin" href="#share-weixin-modal" data-toggle="modal">
+                    <i class="fa fa-weixin"></i>
+                </a>
+                <a href="https://twitter.com/#" target="_blank">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <br><a href="http://windows.microsoft.com/zh-CN/internet-explorer/download-ie" class="upgrade-ie">本网站不支持 IE6/IE7，如果您希望继续使用 IE 浏览器，请升级至IE8及以上版本</a>
+            </div>
+        </div>
+        <!--modal-->
+        <div class="modal hide fade share-weixin-modal" id="share-weixin-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <p>关注我们的微信公众号，获得每日好文推荐。微信中搜索「极客分享」或者扫一扫下方二维码：</p>
+                        <img src="{{ asset('bundles/homeindex/images/jianshu_wechat_qrcode.jpg') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
+//public/css/

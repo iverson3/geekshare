@@ -1,0 +1,89 @@
+{# 总记录数 #}
+<div class="count">
+    总数据: {{ pagination.getTotalItemCount }}
+</div>
+<br>
+
+<table>
+	{# 头部标题 and 支持排序 #}
+	<tr>
+	    <th>{{ knp_pagination_sortable(pagination, '编号', 's.id') }}</th>
+	    <th>{{ knp_pagination_sortable(pagination, '极客ID', 'u.id') }}</th>
+	    <th{% if pagination.isSorted('s.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, '分享标题', 's.title') }}</th>
+	    <th>{{ knp_pagination_sortable(pagination, '分享时间', 's.sharetime') }}</th>
+	</tr>
+
+	{# 分享列表 #}
+	{% for share in pagination %}
+	<tr {% if loop.index is odd %}class="color"{% endif %}>
+	    <td>{{ share.id }}</td>
+	    <td>{{ share.uid }}</td>
+	    <td>{{ share.title }}</td>
+	    <td>{{ share.sharetime }}</td>
+	</tr>
+	{% endfor %}
+</table>
+<br>
+
+{# 显示分页条 #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
+
+
+
+<style type="text/css">
+    /*start pagination style*/
+    .pagination span{
+        background-color: #0F76BB;
+        padding: 4px 11px 4px 11px;
+        margin-left: 5px;
+        text-decoration: none;
+        color: white;
+    }
+    .pagination span a{
+    	padding-left: 6px;
+    	color: white;
+    }
+    .pagination span:hover{
+        background-color: gray;
+        color: white;
+    }
+    .pagination .current{
+        background-color: gray;
+        padding:4px 11px 4px 11px;
+        cursor: default;
+        color: white;
+    }
+    .pagination .first{
+        background-color: blue;
+        padding:4px 11px 4px 11px;
+        cursor: default;
+        color: white;
+    }
+    .pagination .previous{
+        background-color: blue;
+        padding:4px 11px 4px 11px;
+        cursor: default;
+        color: white;
+    }
+    .pagination .next{
+        background-color: blue;
+        padding:4px 11px 4px 11px;
+        cursor: default;
+        color: white;
+    }
+    .pagination .last{
+        background-color: blue;
+        padding:4px 11px 4px 11px;
+        cursor: default;
+        color: white;
+    }
+    /*end pagination style*/
+
+
+    .sortable{
+        color: gray;
+    }
+</style>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<form action="{{ path('admin_index_doshareform') }}" method="post">
+		标题: <input type="text" name="title"> <br>
+		原因: <input type="text" name="reason"> <br>
+		地址: <input type="text" name="url" id="shareurl" onBlur="check()"><span id="tip" style=" color: red; opacity: 0;">(地址重复了)</span> <br>
+		标签: <input type="text" name="labels">(逗号分割) <br>
+		类型: <select name="isown">
+			<option value="0">分享</option>
+			<option value="1">原创</option>
+		</select><br>
+		类别: <select name="langid">
+			{% for lang in langs %}
+				<option value="{{ lang.id }}">{{ lang.name }}</option>
+			{% endfor %}
+		</select><br><br>
+		<input type="submit" value="发 布">
+	</form>
+
+	
+	<script type="text/javascript" src="{{ asset('bundles/adminindex/js/jquery-1.9.1.min.js') }}"></script>
+	<script type="text/javascript">
+		var url = "{{ path('admin_index_ajaxcheck') }}";
+		function check(){
+			var shareurl = $('#shareurl').val();
+			$.post(
+				url, 
+				{shareurl: shareurl},
+				function(data) {
+					// 服务器端响应数据已经是json格式
+					if (data['res'] == 1) {
+						$('#tip').css({'opacity': '1.0'});
+					} else {
+						$('#tip').css({'opacity': '0'});
+					}
+				}
+			);
+		}
+	</script>
+</body>
+</html>

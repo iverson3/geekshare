@@ -1,0 +1,14 @@
+parameters:
+#    home_index.example.class: Home\IndexBundle\Example
+
+#services:
+#    home_index.example:
+#        class: %home_index.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+# 将twig扩展函数过滤器created_ago注册为一个服务 (模板中就可以使用created_ago过滤器了)
+services:
+    home_index.twig.extension:
+        class: Home\IndexBundle\Twig\Extension\HomeIndexExtension 
+        tags:
+            - { name: twig.extension }

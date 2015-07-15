@@ -1,0 +1,15 @@
+home_user_index:
+    pattern:  /user/{id}
+    defaults: { _controller: HomeUserBundle:Index:index, id: 1 }
+
+home_user_users:
+    pattern:  /users/{userid}
+    defaults: { _controller: HomeUserBundle:Index:users }
+
+home_user_edituser:
+    pattern:  /edit/{userid}
+    defaults: { _controller: HomeUserBundle:Index:edituser }
+
+home_user_doedituser:
+    pattern:  /doedit
+    defaults: { _controller: HomeUserBundle:Index:doedituser }

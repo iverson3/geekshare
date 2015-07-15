@@ -1,0 +1,13 @@
+{% for geek in geeklist %}
+	{% if geek.isopen == 1 %}
+	{% else %}
+	{% endif %}
+
+	<h3>{{ geek.username }}</h3>
+	<h3>积分: {{ geek.points }}</h3>
+	<h3>{{ geek.logintime|date('d/m/Y H:i') }}</h3>
+	<h3>{{ geek.name }}</h3>
+	<h3>{{ geek.pic }}</h3>
+	<h3>座右铭: {{ geek.motto }}</h3>
+	<hr>
+{% endfor %}

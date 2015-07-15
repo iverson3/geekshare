@@ -1,0 +1,11 @@
+Hello , this is admin<br><br>
+
+
+{% for lang in langlist %}
+      	{{ lang.name }}
+{% endfor %}
+
+
+{% stylesheets '@AdminIndexBundle/Resources/public/css/*' filter='cssrewrite' %}
+<link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+{% endstylesheets %}
